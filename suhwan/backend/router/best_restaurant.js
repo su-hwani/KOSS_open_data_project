@@ -9,20 +9,20 @@ const best_restaurant_router = express.Router()
 
 // 베스트 맛집에 등록하기
 best_restaurant_router.post("/new", async (req, res)=> {
-    const restaurant = new Restaurant({
-        X: req.X,
-        Y: req.Y,
-        name: req.name,
-        recommend: req.recommend // 특정 추천 수 넘으면 베스트 맛집 DB에 등록
-    })
-    await restaurant.save()
+    await Restaurant.findOneAndUpdate(
+        {name: req.body.name}, 
+        {is_Best: true},
+        {new:true})
     return res.send("베스트 맛집에 등록되었습니다.")
     // new_upload best restaurant
 })
 
 // 베스트 맛집에서 삭제하기
 best_restaurant_router.post("/delete", async (req, res)=>{
-    await Restaurant.deleteOne({ name: req.name });
+    await Restaurant.findOneAndUpdate(
+        {name: req.body.name},
+        {is_Best: false},
+    )
     return res.send("베스트 맛집에서 삭제되었습니다.")
 })
 
@@ -46,8 +46,9 @@ best_restaurant_router.get("/near", async (req, res)=>{
         if (restaurant_data){
             Restaurant.find({
                 $and: [
-                {"X":{$gt: Number(restaurant_data.X) - 20, $lt: Number(restaurant_data.X) + 20}},
-                {"Y":{$gt: Number(restaurant_data.Y) - 20, $lt: Number(restaurant_data.Y) + 20}}
+                {"X":{$gt: restaurant_data.X - 20, $lt: restaurant_data.X + 20}},
+                {"Y":{$gt: restaurant_data.Y - 20, $lt: restaurant_data.Y + 20}},
+                {"is_Best":true}
                 ]}).then(result => {
                 if (result[0]){ 
                     // 주변에 등록된 BEST 맛집이 하나라도 있는 경우

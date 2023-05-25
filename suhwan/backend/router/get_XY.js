@@ -23,7 +23,7 @@ XYrouter.get("/", function (req, res) {
         return res.send(result)
       }
     }
-    return res.status(422).json("can not get restaurant")
+    return res.status(422).json("해당 식당이 없습니다.")
   })
 });
 
