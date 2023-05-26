@@ -4,7 +4,8 @@ const Restaurant_Schema = new mongoose.Schema({
     X: Number,
     Y: Number,
     name: String,
-    recommend: String,
+    recommend_count: Number,
+    recommend_user_list: [ Object ], // user 객체 list
     waiting_time: Number,
     menu: [ String ],
     is_Best: Boolean

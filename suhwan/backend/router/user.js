@@ -19,6 +19,13 @@ user_router.get("/", async (req,res)=>{
     })
 })
 
+user_router.get("/test_url", async (req, res)=>{
+    await User.findOne({ID:req.body.ID}).then(result=>{
+        res.send(result)
+    })
+})
+
+
 // 임시 user 신규 가입 -> 회원가입 부분 완성되면 수정
 user_router.post("/join", async (req,res)=>{
     const user = new User({
@@ -35,7 +42,7 @@ user_router.post("/join", async (req,res)=>{
 user_router.post("/favorites_insert", async (req, res)=>{
     await User.findOne({ID: req.body.ID}).then(async result=>{
         if (result){
-            result.Favorites.push(req.body.Favorites)
+            result.Favorites.push(req.body.restaurant)
             await result.save()
             res.send("좋아요 누른 식당 목록에 추가하였습니다.")
         }else{

@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 
 const User_Schema = new mongoose.Schema({
-    Favorites : [String],
+    Favorites : [Object],
     ID : String,
     PW : String,
     CEO : Boolean,  // False: 일반, True: 사장

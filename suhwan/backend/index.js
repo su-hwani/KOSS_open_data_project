@@ -8,6 +8,7 @@ import best_restaurant_router from './router/best_restaurant.js'
 import normal_restaurant_router from './router/normal_restaurant.js'
 import waiting_time_router from './router/waiting_time.js'
 import user_router from './router/user.js'
+import recommend_router from './router/recommend.js'
 
 import dotenv from 'dotenv'
 import nodemon from 'nodemon'
@@ -34,6 +35,7 @@ app.use("/best_restaurant", best_restaurant_router)
 app.use("/waiting_time", waiting_time_router)
 app.use("/normal_restaurant", normal_restaurant_router)
 app.use("/user", user_router)
+app.use("/recommend", recommend_router)
 
 app.listen(port)
 console.log(`server running at http ${port}\n`)
