@@ -28,7 +28,6 @@ recommend_router.post("/up", async (req, res)=>{
             res.send("해당 식당 이름이 잘못되었습니다.")
         }
     })
-
 })
 
 // 좋아요(=추천)을 취소한 경우 -> USER 객체 좋아요 누른 식당 리스트에서 삭제
